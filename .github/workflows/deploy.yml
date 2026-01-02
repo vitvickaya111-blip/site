@@ -1,54 +1,22 @@
-name: Deploy to Server
+name: Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   deploy:
-    name: Deploy to VPS
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to server via SSH
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
+          host: 92.246.128.158
+          username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
           script: |
-            echo "🚀 Starting deployment..."
-
-            # Navigate to project directory
-            cd ${{ secrets.PROJECT_PATH || '/var/www/site' }}
-
-            # Pull latest changes
-            echo "📥 Pulling latest changes from GitHub..."
+            cd /var/www/site
             git pull origin main
-
-            # Set correct permissions
-            echo "🔐 Setting permissions..."
-            find . -type f -exec chmod 644 {} \;
-            find . -type d -exec chmod 755 {} \;
-
-            # Restart web server if needed (uncomment if using nginx/apache)
-            # sudo systemctl reload nginx
-
-            echo "✅ Deployment completed successfully!"
-            echo "🕐 Deployed at: $(date)"
-
-      - name: Deployment status
-        if: success()
-        run: echo "🎉 Successfully deployed to production server!"
-
-      - name: Deployment failed
-        if: failure()
-        run: |
-          echo "❌ Deployment failed!"
-          exit 1
+            cp relocation-website.html /var/www/html/index.html
+            echo "✅ Deployed at $(date)"
