@@ -88,10 +88,51 @@ python3 -m http.server 8000
 - **Telegram reviews**: Chat-like cards with avatar gradients
 - **Buttons**: Gradient background with hover animations
 
+## Deployment & CI/CD
+
+### Automatic Deployment
+- **GitHub Actions** workflow: `.github/workflows/deploy.yml`
+- **Triggers**: Automatic on push to `main` branch, or manual via Actions tab
+- **Method**: SSH deployment to VPS server
+- **Deploy script**: `deploy.sh` (runs on server)
+
+### Required GitHub Secrets
+Set these in **Settings → Secrets and variables → Actions**:
+- `SERVER_HOST`: Server IP or domain
+- `SERVER_USER`: SSH username
+- `SSH_PRIVATE_KEY`: Private SSH key for authentication
+- `SERVER_PORT`: SSH port (default: 22)
+- `PROJECT_PATH`: Path on server (default: /var/www/site)
+
+### Deployment Process
+1. Push changes to `main` branch
+2. GitHub Actions triggers automatically
+3. Connects to server via SSH
+4. Pulls latest changes from repository
+5. Copies files to web root
+6. Sets correct permissions
+7. Optional: Reloads web server
+
+### Manual Deployment
+SSH into server and run:
+```bash
+cd /var/www/site
+./deploy.sh
+```
+
+### Setup Instructions
+See `DEPLOYMENT.md` for complete setup guide including:
+- Server configuration
+- SSH key generation
+- GitHub Secrets setup
+- Web server configuration (nginx/apache)
+- SSL certificate setup
+- Troubleshooting
+
 ## Git Status
-- New file: `relocation-website.html` (staged)
-- No remote repository configured
-- Currently on `main` branch
+- Repository: `git@github.com:vitvickaya111-blip/site.git`
+- Remote: `origin`
+- Branch: `main`
 
 ## Common Tasks
 
