@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Твоя подруга в эмиграции | Релокация с поддержкой</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0A0A0A;
+            --bg-card: #1A1A1A;
+            --bg-light: #2A2A2A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --accent-pink: #FF6B9D;
+            --accent-purple: #A855F7;
+            --accent-blue: #3B82F6;
+            --accent-yellow: #FCD34D;
+            --accent-green: #10B981;
+            --accent-orange: #F97316;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Floating Travel Icons */
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .float-icon {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.15;
+            animation: float-around 20s infinite ease-in-out;
+        }
+
+        .float-icon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 25s; }
+        .float-icon:nth-child(2) { left: 80%; top: 30%; animation-delay: 5s; animation-duration: 30s; }
+        .float-icon:nth-child(3) { left: 60%; top: 60%; animation-delay: 3s; animation-duration: 28s; }
+        .float-icon:nth-child(4) { left: 20%; top: 70%; animation-delay: 7s; animation-duration: 32s; }
+        .float-icon:nth-child(5) { left: 90%; top: 80%; animation-delay: 2s; animation-duration: 26s; }
+        .float-icon:nth-child(6) { left: 40%; top: 15%; animation-delay: 9s; animation-duration: 29s; }
+        .float-icon:nth-child(7) { left: 70%; top: 90%; animation-delay: 4s; animation-duration: 27s; }
+        .float-icon:nth-child(8) { left: 15%; top: 45%; animation-delay: 6s; animation-duration: 31s; }
+
+        @keyframes float-around {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% { 
+                transform: translate(50px, -30px) rotate(90deg) scale(1.1);
+            }
+            50% { 
+                transform: translate(-30px, 40px) rotate(180deg) scale(0.9);
+            }
+            75% { 
+                transform: translate(40px, 50px) rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 30px rgba(255, 107, 157, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-pink);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            background: var(--bg-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-text .tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.3rem 3rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeIn 1s ease 0.5s backwards;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            background: var(--bg-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple), var(--accent-blue));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 157, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 5%;
+            background: var(--bg-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: calc(33.333% - 1.7rem);
+            flex-shrink: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 157, 0.3);
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.2);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
+
+        .service-content {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            min-height: 2.5rem;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            min-height: 4.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 0 0 1.5rem 0;
+            padding: 0;
+        }
+
+        .service-features li {
+            padding: 0.6rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .price-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .service-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .service-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 5%;
+            background: var(--bg-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .telegram-review {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .telegram-review::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .telegram-review:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 157, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+        }
+
+        .telegram-review:hover::before {
+            opacity: 1;
+        }
+
+        .tg-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tg-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .tg-info {
+            flex: 1;
+        }
+
+        .tg-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .tg-time {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .tg-message {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 10px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Review Form */
+        .review-form-container {
+            max-width: 700px;
+            margin: 5rem auto 0;
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .review-form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .review-form-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .review-form select {
+            width: 100%;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .review-form select:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+
+        .submit-review-button {
+            width: 100%;
+            padding: 1.3rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-review-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 5%;
+            background: var(--bg-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 4rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.3rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 1rem 1.5rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-method:hover {
+            color: var(--accent-pink);
+            transform: translateY(-3px);
+            border-color: rgba(255, 107, 157, 0.3);
+        }
+
+        /* Social Icons */
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .social-icon.instagram {
+            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF);
+        }
+
+        .social-icon.telegram {
+            background: #0088cc;
+        }
+
+        .social-icon.bot {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-cta {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            background: var(--bg-light);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 107, 157, 0.3);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.2);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .service-card {
+                width: calc(50% - 1.25rem);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .hero-content,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .service-card {
+                width: 100%;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-methods,
+            .social-links {
+                flex-direction: column;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .review-form-container {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Travel Icons -->
+    <div class="floating-icons">
+        <div class="float-icon" style="color: var(--accent-pink);">✈️</div>
+        <div class="float-icon" style="color: var(--accent-blue);">🌍</div>
+        <div class="float-icon" style="color: var(--accent-yellow);">🎒</div>
+        <div class="float-icon" style="color: var(--accent-purple);">🗺️</div>
+        <div class="float-icon" style="color: var(--accent-green);">🏖️</div>
+        <div class="float-icon" style="color: var(--accent-orange);">🎫</div>
+        <div class="float-icon" style="color: var(--accent-pink);">🧳</div>
+        <div class="float-icon" style="color: var(--accent-blue);">🌴</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Твоя подруга в эмиграции</a>
+            <ul class="nav-links">
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Анастасия Витвицкая</h1>
+                <p class="subtitle">Ваш гид в мир новых возможностей. Помогаю женщинам начать жизнь за границей — с поддержкой, уверенностью и практическими решениями.</p>
+                <p class="tagline">«От мечты до посадочного талона»</p>
+                <a href="#services" class="cta-button">Начать путь</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop" alt="Релокация">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Анастасия Витвицкая</h3>
+                    <p>Я прошла путь от <span class="highlight">старшего лейтенанта в российской тюремной системе</span> до счастливой мамы и предпринимательницы в Бразилии. 8 лет работы в системе научили меня силе, а путешествия по Азии и переезд в Южную Америку — открытости к новому.</p>
+                    <p>Моя настоящая миссия — <span class="highlight">помогать женщинам выйти из жопы</span>: из абьюзивных отношений, из ситуаций где приходится жить не так как хочется, а как скажут другие. Я знаю, каково это — делать сложный выбор и начинать всё с нуля. И я здесь, чтобы поддержать тебя на этом пути.</p>
+                    <p>Сегодня я помогаю женщинам, которые мечтают о переменах, но не знают, с чего начать. Релокация — это не просто переезд. Это шанс начать жить по-своему, свободно, так как ты хочешь.</p>
+                    <p>Живу в Бразилии с сыном Матеусом и партнёром. Веду бизнес, делюсь опытом в Instagram и знаю, каково это — начинать жизнь с нуля в новой стране.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">9K+</div>
+                        <div class="stat-label">Подписчиков в Instagram</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Довольных клиентов</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Лет опыта эмиграции</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Стран, где я жила</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-container">
+            <h2 class="section-title">Выбери свой путь</h2>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <span class="service-badge">Популярно</span>
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=250&fit=crop" alt="Консультация" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Индивидуальная консультация</h3>
+                        <p class="service-description">Персональная сессия, где мы разберём твою ситуацию, определим лучшие направления для переезда и составим пошаговый план действий.</p>
+                        <ul class="service-features">
+                            <li>90 минут онлайн встречи</li>
+                            <li>Анализ твоих возможностей</li>
+                            <li>Индивидуальная дорожная карта</li>
+                            <li>Поддержка в чате 7 дней</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">$300</div>
+                                <span class="price-label">за консультацию</span>
+                            </div>
+                            <a href="#contact" class="service-button">Записаться</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <span class="service-badge">Новинка</span>
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=250&fit=crop" alt="PDF гайд" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">PDF-гайд «От мечты до посадочного»</h3>
+                        <p class="service-description">Полное руководство из 10 шагов к переезду за границу. Пошаговый план, чек-листы и практические советы для самостоятельной релокации.</p>
+                        <ul class="service-features">
+                            <li>120+ страниц полезной информации</li>
+                            <li>Чек-листы и шаблоны документов</li>
+                            <li>Ресурсы и ссылки</li>
+                            <li>Бессрочный доступ</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">$50</div>
+                                <span class="price-label">единоразово</span>
+                            </div>
+                            <a href="#contact" class="service-button">Купить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&h=250&fit=crop" alt="Сообщество" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Сообщество поддержки</h3>
+                        <p class="service-description">Закрытый чат в Telegram для женщин, которые готовятся к переезду или уже живут за границей. Поддержка, обмен опытом, полезные контакты.</p>
+                        <ul class="service-features">
+                            <li>Доступ к закрытому чату</li>
+                            <li>Еженедельные эфиры</li>
+                            <li>База знаний и ресурсов</li>
+                            <li>Нетворкинг с единомышленницами</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">$30</div>
+                                <span class="price-label">в месяц</span>
+                            </div>
+                            <a href="#contact" class="service-button">Присоединиться</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=250&fit=crop" alt="Разработка сайтов" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Разработка сайтов</h3>
+                        <p class="service-description">Создам для тебя стильный и функциональный сайт или лендинг. Идеально для предпринимательниц, коучей и специалистов, которые хотят выделиться онлайн.</p>
+                        <ul class="service-features">
+                            <li>Уникальный дизайн</li>
+                            <li>Адаптивная вёрстка</li>
+                            <li>Форма захвата лидов</li>
+                            <li>Интеграции с соцсетями</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">$300</div>
+                                <span class="price-label">под ключ</span>
+                            </div>
+                            <a href="#contact" class="service-button">Обсудить проект</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <span class="service-badge">Автоматизация</span>
+                    <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&h=250&fit=crop" alt="Разработка ботов" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Разработка ботов на заказ</h3>
+                        <p class="service-description">Создам для тебя Telegram-бот под ключ: от простого помощника до сложной системы с оплатами и интеграциями. Автоматизируй консультации, продажи и общение с клиентами.</p>
+                        <ul class="service-features">
+                            <li>Бот с автоответами и меню</li>
+                            <li>Интеграция платёжных систем</li>
+                            <li>База данных и аналитика</li>
+                            <li>Техподдержка и обновления</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">$500</div>
+                                <span class="price-label">под ключ</span>
+                            </div>
+                            <a href="#contact" class="service-button">Обсудить проект</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 5.5 - Free Bot Helper -->
+                <div class="service-card">
+                    <span class="service-badge">Бесплатно</span>
+                    <img src="https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=600&h=250&fit=crop" alt="Telegram бот" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Мой бот-помощник</h3>
+                        <p class="service-description">Попробуй моего бесплатного бота! Он ответит на основные вопросы о релокации 24/7. Получи базовую информацию, чек-листы и ресурсы прямо в Telegram.</p>
+                        <ul class="service-features">
+                            <li>Доступ к базе знаний</li>
+                            <li>Готовые чек-листы для переезда</li>
+                            <li>Работает круглосуточно</li>
+                            <li>Полностью бесплатно</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">Бесплатно</div>
+                                <span class="price-label">попробуй сейчас</span>
+                            </div>
+                            <a href="https://t.me/podruga_emigration_bot" target="_blank" class="service-button">Открыть бот</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <span class="service-badge">Для бизнеса</span>
+                    <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=600&h=250&fit=crop" alt="Импорт из Парагвая" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Бизнес-поездки в Парагвай</h3>
+                        <p class="service-description">Организую выгодные закупки товаров в Парагвае для перепродажи. Проверенные поставщики, логистика и опыт прибыльных поездок.</p>
+                        <ul class="service-features">
+                            <li>Подбор товаров и поставщиков</li>
+                            <li>Организация логистики</li>
+                            <li>Сопровождение процесса</li>
+                            <li>Работа на заёмные средства</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">Индивидуально</div>
+                                <span class="price-label">по договорённости</span>
+                            </div>
+                            <a href="#contact" class="service-button">Узнать детали</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=250&fit=crop" alt="Курс" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Онлайн-курс «Новая жизнь»</h3>
+                        <p class="service-description">Комплексная программа подготовки к эмиграции. От выбора страны до первых месяцев адаптации. Старт — весна 2026.</p>
+                        <ul class="service-features">
+                            <li>8 недель обучения</li>
+                            <li>Записи вебинаров</li>
+                            <li>Домашние задания с проверкой</li>
+                            <li>Групповые созвоны</li>
+                        </ul>
+                        <div class="price-container">
+                            <div class="price-info">
+                                <div class="price">$300</div>
+                                <span class="price-label">полный курс</span>
+                            </div>
+                            <a href="#contact" class="service-button">Записаться в лист ожидания</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="section-container">
+            <h2 class="section-title">Отзывы</h2>
+            <div class="testimonials-grid">
+                <!-- Review 1 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #FF6B9D, #A855F7);">М</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Мария</div>
+                            <div class="tg-time">14:32</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Настя, спасибо тебе огромное! 😭 Благодаря тебе я наконец-то уехала из токсичных отношений во Вьетнам. Ты поддерживала меня когда я боялась, помогла с документами и просто ВЕРИЛА в меня. Сейчас я здесь уже 3 месяца и это лучшее решение в моей жизни ❤️
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #3B82F6, #10B981);">А</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Анна</div>
+                            <div class="tg-time">09:15</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Я долго не могла решиться на переезд, все вокруг говорили "ты с ребенком никуда не уедешь", "это безумие". После консультации с Настей поняла что МОГУ и это реально. Через полгода мы с дочкой уже во Вьетнаме! Настя, ты изменила мою жизнь 🙏
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #FCD34D, #F97316);">Е</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Екатерина</div>
+                            <div class="tg-time">16:48</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        PDF-гайд просто бомба! 🔥 Всё разложено по полочкам, куча чек-листов. Я по нему сама всё организовала и уехала в Португалию. Настя, ты крутая, спасибо что делишься опытом так открыто 💕
+                    </div>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #A855F7, #FF6B9D);">О</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Ольга</div>
+                            <div class="tg-time">11:23</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Девочки, если сомневаетесь - идите к Насте! Я вышла из абьюзивного брака благодаря её поддержке и консультациям. Она не просто помогла с переездом, она помогла мне ПОВЕРИТЬ что я достойна нормальной жизни. Сейчас я в Грузии, работаю онлайн и счастлива как никогда ✨
+                    </div>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #10B981, #3B82F6);">Д</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Дарья</div>
+                            <div class="tg-time">19:02</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Настя сделала мне бот для моего бизнеса - работает идеально! Всё что я хотела: оплаты, автоответы, база клиентов. Причём объяснила всё так понятно что я сама теперь им управляю. Рекомендую на 💯
+                    </div>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #F97316, #FCD34D);">Ю</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Юлия</div>
+                            <div class="tg-time">13:56</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Я была в таком депрессняке, думала жизнь закончена в 35 лет. Настя показала что можно начать всё заново! Прошла её курс, переехала в Таиланд. Теперь работаю удаленно, занимаюсь йогой на пляже. Спасибо за пинок и поддержку! 🌴
+                    </div>
+                </div>
+
+                <!-- Review 7 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #FF6B9D, #F97316);">С</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Светлана</div>
+                            <div class="tg-time">10:10</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Сообщество в телеге - просто находка! 👯‍♀️ Столько девочек которые прошли через то же самое. Обмениваемся контактами, советами, поддерживаем друг друга. Настя проводит эфиры где отвечает на все вопросы. За $30 в месяц это вообще даром!
+                    </div>
+                </div>
+
+                <!-- Review 8 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #3B82F6, #A855F7);">Н</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Наталья</div>
+                            <div class="tg-time">15:34</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Настя не просто консультант, она как подруга которая прошла этот путь. Без воды, честно рассказывает и про сложности тоже. После разговора с ней я поняла что ХОЧУ и КАК. Уже собираю документы на Бали 🏝️
+                    </div>
+                </div>
+
+                <!-- Review 9 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #10B981, #FCD34D);">И</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Ирина</div>
+                            <div class="tg-time">08:45</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Я думала что никогда не смогу уехать из-за родителей, мужа, работы. "Кто ты без нас", "не справишься" - слышала постоянно. Настя помогла найти силы ПОСЛАТЬ это всё и жить для себя. Я в Испании уже год. Работаю, путешествую, живу КАК Я ХОЧУ 🦋
+                    </div>
+                </div>
+
+                <!-- Review 10 -->
+                <div class="telegram-review">
+                    <div class="tg-header">
+                        <div class="tg-avatar" style="background: linear-gradient(135deg, #A855F7, #3B82F6);">В</div>
+                        <div class="tg-info">
+                            <div class="tg-name">Вероника</div>
+                            <div class="tg-time">17:21</div>
+                        </div>
+                    </div>
+                    <div class="tg-message">
+                        Хочу поблагодарить Настю за сайт который она мне сделала! 🚀 Стильный, быстрый, с формами для заявок. Клиенты пишут что очень удобно. Цена адекватная, сроки соблюдены. Профи своего дела!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Form -->
+            <div class="review-form-container">
+                <h3 class="review-form-title">Оставь свой отзыв</h3>
+                <p class="review-form-subtitle">Поделись своим опытом работы со мной — это поможет другим девочкам принять решение 💕</p>
+                <form id="reviewForm" class="review-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reviewName">Имя</label>
+                            <input type="text" id="reviewName" name="reviewName" placeholder="Как тебя зовут?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewService">Услуга</label>
+                            <select id="reviewService" name="reviewService" required>
+                                <option value="">Выбери услугу</option>
+                                <option value="consultation">Консультация</option>
+                                <option value="guide">PDF-гайд</option>
+                                <option value="community">Сообщество</option>
+                                <option value="website">Разработка сайта</option>
+                                <option value="bot">Разработка бота</option>
+                                <option value="paraguay">Парагвай</option>
+                                <option value="course">Онлайн-курс</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Твой отзыв</label>
+                        <textarea id="reviewText" name="reviewText" placeholder="Расскажи о своём опыте..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-review-button">Отправить отзыв</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-container">
+            <h2 class="section-title">Давай начнём твою трансформацию</h2>
+            <div class="contact-content">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Интересующая услуга</label>
+                        <input type="text" id="service" name="service" placeholder="Например: консультация, PDF-гайд">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" placeholder="Расскажи немного о себе и своих планах..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Отправить заявку</button>
+                </form>
+
+                <div class="contact-info">
+                    <h3>Другие способы связи</h3>
+                    <div class="contact-methods">
+                        <a href="https://www.instagram.com/podruga_iz_brazilii/" class="contact-method" target="_blank">
+                            <div class="social-icon instagram">📱</div>
+                            Instagram: @podruga_iz_brazilii
+                        </a>
+                        <a href="https://t.me/ambasadorsvobody" class="contact-method" target="_blank">
+                            <div class="social-icon telegram">💬</div>
+                            Telegram: @ambasadorsvobody
+                        </a>
+                        <a href="https://t.me/podruga_emigration_bot" class="contact-method" target="_blank">
+                            <div class="social-icon bot">🤖</div>
+                            Бот: @podruga_emigration_bot
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h2 class="footer-cta">Готова начать новую главу?</h2>
+            <a href="#contact" class="cta-button">Связаться со мной</a>
+            <div class="social-links">
+                <a href="https://www.instagram.com/podruga_iz_brazilii/" class="social-link" target="_blank">
+                    <div class="social-icon instagram">📱</div>
+                    Instagram
+                </a>
+                <a href="https://t.me/ambasadorsvobody" class="social-link" target="_blank">
+                    <div class="social-icon telegram">💬</div>
+                    Telegram
+                </a>
+                <a href="https://t.me/podruga_emigration_bot" class="social-link" target="_blank">
+                    <div class="social-icon bot">🤖</div>
+                    Бот
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Твоя подруга в эмиграции. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Telegram Bot Configuration
+        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; // Вставь токен бота
+        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE'; // Твой Chat ID
+
+        async function sendToTelegram(message) {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                return response.ok;
+            } catch (error) {
+                console.error('Ошибка отправки в Telegram:', error);
+                return false;
+            }
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+
+            const telegramMessage = `
+🔔 <b>НОВАЯ ЗАЯВКА С САЙТА</b>
+
+👤 <b>Имя:</b> ${name}
+📧 <b>Email:</b> ${email}
+💼 <b>Услуга:</b> ${service || 'не указана'}
+
+💬 <b>Сообщение:</b>
+${message}
+
+⏰ <b>Время:</b> ${new Date().toLocaleString('ru-RU', { timeZone: 'America/Sao_Paulo' })}
+            `.trim();
+
+            const success = await sendToTelegram(telegramMessage);
+            
+            if (success) {
+                alert('Спасибо за заявку! Я свяжусь с тобой в ближайшее время 💕');
+                this.reset();
+            } else {
+                alert('Упс! Что-то пошло не так. Напиши мне напрямую в Telegram: @ambasadorsvobody');
+            }
+        });
+
+        // Review form submission
+        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reviewName').value;
+            const service = document.getElementById('reviewService').value;
+            const reviewText = document.getElementById('reviewText').value;
+
+            const serviceNames = {
+                'consultation': 'Консультация',
+                'guide': 'PDF-гайд',
+                'community': 'Сообщество',
+                'website': 'Разработка сайта',
+                'bot': 'Разработка бота',
+                'paraguay': 'Парагвай',
+                'course': 'Онлайн-курс'
+            };
+
+            const telegramMessage = `
+⭐️ <b>НОВЫЙ ОТЗЫВ С САЙТА</b>
+
+👤 <b>Имя:</b> ${name}
+💼 <b>Услуга:</b> ${serviceNames[service]}
+
+💬 <b>Отзыв:</b>
+${reviewText}
+
+⏰ <b>Время:</b> ${new Date().toLocaleString('ru-RU', { timeZone: 'America/Sao_Paulo' })}
+            `.trim();
+
+            const success = await sendToTelegram(telegramMessage);
+            
+            if (success) {
+                alert('Спасибо за отзыв! ❤️ Он очень важен для меня и поможет другим девочкам принять решение.');
+                this.reset();
+            } else {
+                alert('Упс! Отправь отзыв мне напрямую в Telegram: @ambasadorsvobody 💕');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Observe stat cards
+        document.querySelectorAll('.stat-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.15}s`;
+            observer.observe(card);
+        });
+
+        // Observe telegram reviews
+        document.querySelectorAll('.telegram-review').forEach((review, index) => {
+            review.style.opacity = '0';
+            review.style.transform = 'translateY(30px)';
+            review.style.transition = `all 0.6s ease ${index * 0.08}s`;
+            observer.observe(review);
+        });
+    </script>
+</body>
+</html>
